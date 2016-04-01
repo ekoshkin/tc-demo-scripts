@@ -1,9 +1,10 @@
 #
 # ConvertNet40ReqScript.ps1
 #
-Clear-Host
 
-Import-Module (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "..\..\TeamCity\TeamCity.psm1") -Force -DisableNameChecking
+#Clear-Host
+
+Import-Module (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "\modules\bootstrap.psm1") -Force -DisableNameChecking
 
 Get-Location
 
@@ -17,7 +18,7 @@ $connection = @{
 
 $client = New-TeamCityConnection -ConnectionDetails $connection
 
-Set-Location -Path "c:\Data\Docs\trainings\brno\vcs-demo\static-resources-repo\"
+Set-Location -Path "..\static-resources-repo\"
 
 Write-Host "Listing all users in a group" $userGroupName
 foreach($user in $client.Users.AllUsersByUserGroup($userGroupName)){

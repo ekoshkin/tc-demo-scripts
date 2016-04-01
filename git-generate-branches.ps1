@@ -1,9 +1,8 @@
 #
 # generate-branches.ps1
 #
-Clear-Host
     
-Import-Module (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "..\..\TeamCity\TeamCity.psm1") -Force -DisableNameChecking
+Import-Module (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "\modules\bootstrap.psm1") -Force -DisableNameChecking
 
 $userGroupName = "ALL_USERS_GROUP"
 
@@ -14,6 +13,8 @@ $connection = @{
 	 }
 
 $client = New-TeamCityConnection -ConnectionDetails $connection
+
+Set-Location -Path "\static-resources-repo\"
 
 Write-Host "Listing all users in a group" $userGroupName
 foreach($user in $client.Users.AllUsersByUserGroup($userGroupName)){
